@@ -29,11 +29,13 @@ $ source ~/.zshrc
 ![image](https://github.com/user-attachments/assets/ffad5d86-e5ed-4280-9c62-d651ac65d3e5)
 
 <p>Verification Commands</p>
+
 ```plaintext
 $ riscv32-unknown-elf-gcc --version
 $ riscv32-unknown-elf-objdump --version
 $ riscv32-unknown-elf-gdb --version
 ```
+
 ![image](https://github.com/user-attachments/assets/99c60cae-404c-4224-aabc-330e38aa9f75)
 
   </details>
