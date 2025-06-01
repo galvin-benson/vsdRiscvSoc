@@ -11,7 +11,7 @@ SoC Labs: End-to-End System-on-Chip Design and Verification with RISC-V and open
 <details>
   <summary><big><b>PHASE-1: </b></big>Validate the existing RISC-V SoC design using Synopsys tools and SCL180 PDK. </summary>
   <details>
-    &nbsp;<summary><big><b>WEEK-1: </b></big>Tasks </summary>
+    <summary><big><b>WEEK-1: </b></big>Tasks </summary>
     <h3>TASK:1 Setup/Install & Sanity-Check of RISCV toolchain</h3>
 <p>Extract the toolchain</p>
   
