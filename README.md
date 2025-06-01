@@ -55,7 +55,7 @@ $ spike --isa=rv32imac /opt/riscv/riscv32-unknown-elf/bin/pk  sum1ton_riscv.elf
 ```
 ![image](https://github.com/user-attachments/assets/e0aa8571-48cb-4332-a289-80f686763a61)
 
-•Run riscv32-unknown-elf-gcc -march=rv32imc -mabi=ilp32 -o hello.elf hello.c.
+• Run riscv32-unknown-elf-gcc -march=rv32imc -mabi=ilp32 -o hello.elf hello.c.<br>
 • Use file hello.elf to confirm it’s 32-bit RISC-V.
 ![image](https://github.com/user-attachments/assets/2424cdb5-5610-4e3f-aa1d-3f788570173c)
 
