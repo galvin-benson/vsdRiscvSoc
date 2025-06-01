@@ -51,7 +51,7 @@ $ nano hello.c
 
 ```plaintext
 $ riscv32-unknown-elf-gcc -o hello_riscv.elf hello.c
-$ spike --isa=rv32imac /opt/riscv/riscv32-unknown-elf/bin/pk  sum1ton_riscv.elf
+$ spike --isa=rv32imac /opt/riscv/riscv32-unknown-elf/bin/pk  hello_riscv.elf
 ```
 ![image](https://github.com/user-attachments/assets/e0aa8571-48cb-4332-a289-80f686763a61)
 
