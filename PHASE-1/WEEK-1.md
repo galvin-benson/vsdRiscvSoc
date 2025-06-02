@@ -1,6 +1,6 @@
 <details>
-    <summary><big><b>WEEK-1: </b></big>Tasks </summary>
-    <h3>Task:1 Setup/Install & Sanity-Check of RISCV toolchain</h3>
+    <big><b>WEEK-1: </b></big>Tasks,
+    <summary><h3>Task:1 Setup/Install & Sanity-Check of RISCV toolchain</h3></summary>
 <p>Extract the toolchain</p>
   
 ![image](https://github.com/user-attachments/assets/ce30157a-4a39-4574-80df-b674314f8d67)
@@ -26,7 +26,7 @@ $ riscv32-unknown-elf-gdb --version
 
 ![image](https://github.com/user-attachments/assets/99c60cae-404c-4224-aabc-330e38aa9f75)
 
-<h3>Task:2 Compile “Hello, RISC-V”</h3>
+<summary><h3>Task:2 Compile “Hello, RISC-V”</h3></summary>
 <p>Create a new C file and write a basic code for compilation</p>
 
 ```plaintext
