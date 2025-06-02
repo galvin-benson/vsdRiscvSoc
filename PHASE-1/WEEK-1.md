@@ -1,5 +1,5 @@
+<big><b>WEEK-1: </b></big>Tasks,
 <details>
-    <big><b>WEEK-1: </b></big>Tasks,
     <summary><h3>Task:1 Setup/Install & Sanity-Check of RISCV toolchain</h3></summary>
 <p>Extract the toolchain</p>
   
@@ -25,7 +25,8 @@ $ riscv32-unknown-elf-gdb --version
 ```
 
 ![image](https://github.com/user-attachments/assets/99c60cae-404c-4224-aabc-330e38aa9f75)
-
+</details>
+<details>
 <summary><h3>Task:2 Compile “Hello, RISC-V”</h3></summary>
 <p>Create a new C file and write a basic code for compilation</p>
 
