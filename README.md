@@ -12,7 +12,8 @@ SoC Labs: End-to-End System-on-Chip Design and Verification with RISC-V and open
 ---
 <details>
 <summary>
+<h4>
 
-##[PHASE-1:](https://github.com/galvin-benson/vsdRiscvSoc/tree/main/PHASE-1) Validate the existing RISC-V SoC design using Synopsys tools and SCL180 PDK.</summary>
+[PHASE-1:](https://github.com/galvin-benson/vsdRiscvSoc/tree/main/PHASE-1) Validate the existing RISC-V SoC design using Synopsys tools and SCL180 PDK.</h4></summary>
 [WEEK-1:](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/WEEK-1.md) Focused on setting up a complete RISC-V development environment and understanding the foundational toolchain operations for RV32IMAC
 </details>
