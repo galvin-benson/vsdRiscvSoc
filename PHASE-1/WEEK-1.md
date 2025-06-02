@@ -1,4 +1,3 @@
-<big><b>WEEK-1: </b></big>Tasks,
 <details>
     <summary><h3>Task:1 Setup/Install & Sanity-Check of RISCV toolchain</h3></summary>
 <p>Extract the toolchain</p>
