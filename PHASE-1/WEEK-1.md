@@ -1,6 +1,6 @@
 <details>
     <summary><h3>Task:1 Setup/Install & Sanity-Check of RISCV toolchain</h3></summary>
-<p>Extraction of the toolchain</p>
+##Extraction of the toolchain
   
 ![image](https://github.com/user-attachments/assets/ce30157a-4a39-4574-80df-b674314f8d67)
 
