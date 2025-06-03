@@ -1,13 +1,13 @@
 <details>
     <summary><h3>Task:1 Setup/Install & Sanity-Check of RISCV toolchain</h3></summary>
 
-### Extraction of the toolchain
+#### Extraction of the toolchain
   
 ![image](https://github.com/user-attachments/assets/ce30157a-4a39-4574-80df-b674314f8d67)
 
 ![image](https://github.com/user-attachments/assets/5a7f5595-db06-48ae-bce2-1955123ab8f4)
 
-## Adding the path to avoid calling it by full directory path every time
+### Adding the path to avoid calling it by full directory path every time
 
 ```plaintext
 $ echo 'export PATH=/opt/riscv/bin:$PATH' >> ~/.zshrc
@@ -16,7 +16,7 @@ $ source ~/.zshrc
 
 ![image](https://github.com/user-attachments/assets/ffad5d86-e5ed-4280-9c62-d651ac65d3e5)
 
-## Verification Commands to check the installed tools
+### Verification Commands to check the installed tools
 
 ```plaintext
 $ riscv32-unknown-elf-gcc --version
@@ -29,7 +29,7 @@ $ riscv32-unknown-elf-gdb --version
 <details>
 <summary><h3>Task:2 Compile “Hello, RISC-V”</h3></summary>
 
-## Create a new C file and write a basic code for compilation
+### Create a new C file and write a basic code for compilation
 
 ```plaintext
 $ nano hello.c
@@ -37,7 +37,7 @@ $ nano hello.c
 
 ![image](https://github.com/user-attachments/assets/abdaa2bc-7f55-4369-b0a0-7d87ec3537bb)
 
-## Compilation of the C code using RISC-V compiler
+### Compilation of the C code using RISC-V compiler
 
 ```plaintext
 $ riscv32-unknown-elf-gcc -o hello_riscv.elf hello.c
