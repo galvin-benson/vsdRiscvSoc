@@ -1,12 +1,12 @@
 <details>
     <summary><h3>Task:1 Setup/Install & Sanity-Check of RISCV toolchain</h3></summary>
-<p>Extract the toolchain</p>
+<p>Extraction of the toolchain</p>
   
 ![image](https://github.com/user-attachments/assets/ce30157a-4a39-4574-80df-b674314f8d67)
 
 ![image](https://github.com/user-attachments/assets/5a7f5595-db06-48ae-bce2-1955123ab8f4)
 
-<p>Add the path</p>
+<p>Add the path to avoid calling it by path everytime</p>
 
 ```plaintext
 $ echo 'export PATH=/opt/riscv/bin:$PATH' >> ~/.zshrc
@@ -15,7 +15,7 @@ $ source ~/.zshrc
 
 ![image](https://github.com/user-attachments/assets/ffad5d86-e5ed-4280-9c62-d651ac65d3e5)
 
-<p>Verification Commands</p>
+<p>Verification Commands to check the installed tools.</p>
 
 ```plaintext
 $ riscv32-unknown-elf-gcc --version
