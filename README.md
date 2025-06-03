@@ -5,7 +5,7 @@
 </p>
 </details>
 
-SoC Labs: End-to-End System-on-Chip Design and Verification with RISC-V and open-source EDA tools. Building a processor from scratch.
+SoC Labs: End-to-End System-on-Chip Design and Verification with RISC-V and open-source EDA tools. Building a processor from scratch.<br>Check the folders for Phase and Week-wise Tasks.
 
 <img width="686" alt="Screenshot 2025-06-01 at 11 09 31 PM" src="https://github.com/user-attachments/assets/962be1d5-f35c-418c-86d5-de274dd52047" />
 
