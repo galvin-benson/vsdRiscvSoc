@@ -50,3 +50,20 @@ $ spike --isa=rv32imac /opt/riscv/riscv32-unknown-elf/bin/pk  hello_riscv.elf
 • Use file hello.elf to confirm it’s 32-bit RISC-V.
 ![image](https://github.com/user-attachments/assets/2424cdb5-5610-4e3f-aa1d-3f788570173c)
 </details>
+<details>
+<summary><h3>Task:3 From C to Assembly</h3></summary>
+
+### Generate a .s file (assembly code) from the C code and Open it
+
+```plaintext
+$ riscv32-unknown-elf-gcc -S -O0 hello.c
+$ nano hello.s
+```
+
+![image](https://github.com/user-attachments/assets/f43e2219-66bd-4f47-9d90-09891f2b88f5)
+
+• Basic Tabulation of the keywords
+<img width="627" alt="Screenshot 2025-06-06 at 11 17 25 PM" src="https://github.com/user-attachments/assets/2ed519d9-37de-4709-82f5-b719a39db23a" />
+
+
+</details>
