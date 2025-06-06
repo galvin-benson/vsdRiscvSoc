@@ -2,6 +2,11 @@
     <summary><h3>Task:1 Setup/Install & Sanity-Check of RISCV toolchain</h3></summary>
 
 ### Extraction of the toolchain
+
+```plaintext
+$ cd RISCV
+$ tar -xzf riscv-toolchain-rv32imac-aarch64-2025-02-27.tar.gz
+```
   
 ![image](https://github.com/user-attachments/assets/ce30157a-4a39-4574-80df-b674314f8d67)
 
