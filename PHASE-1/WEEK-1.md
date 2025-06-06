@@ -4,7 +4,6 @@
 ### Extraction of the toolchain
 
 ```plaintext
-$ cd RISCV
 $ tar -xzf riscv-toolchain-rv32imac-aarch64-2025-02-27.tar.gz
 ```
   
