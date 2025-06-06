@@ -1,4 +1,4 @@
-<img width="793" alt="Screenshot 2025-06-06 at 11 22 58 PM" src="https://github.com/user-attachments/assets/cc826d56-86bf-4f37-b1ca-9ca6d04247d6" /><details>
+<details>
     <summary><h3>Task:1 Setup/Install & Sanity-Check of RISCV toolchain</h3></summary>
 
 ### Extraction of the toolchain
