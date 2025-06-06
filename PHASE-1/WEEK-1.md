@@ -63,7 +63,7 @@ $ nano hello.s
 ![image](https://github.com/user-attachments/assets/f43e2219-66bd-4f47-9d90-09891f2b88f5)
 
 • Basic Tabulation of the keywords
-<img width="627" alt="Screenshot 2025-06-06 at 11 17 25 PM" src="https://github.com/user-attachments/assets/2ed519d9-37de-4709-82f5-b719a39db23a" />
+![image](https://github.com/user-attachments/assets/ab9e6026-9fa9-4355-91a4-870e8fbaae08)
 
 
 </details>
