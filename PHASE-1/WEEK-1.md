@@ -1,4 +1,4 @@
-<details>
+<img width="793" alt="Screenshot 2025-06-06 at 11 22 58 PM" src="https://github.com/user-attachments/assets/cc826d56-86bf-4f37-b1ca-9ca6d04247d6" /><details>
     <summary><h3>Task:1 Setup/Install & Sanity-Check of RISCV toolchain</h3></summary>
 
 ### Extraction of the toolchain
@@ -63,7 +63,8 @@ $ nano hello.s
 ![image](https://github.com/user-attachments/assets/f43e2219-66bd-4f47-9d90-09891f2b88f5)
 
 • Basic Tabulation of the keywords
-![image](https://github.com/user-attachments/assets/ab9e6026-9fa9-4355-91a4-870e8fbaae08)
+
+<img width="793" alt="Screenshot 2025-06-06 at 11 22 58 PM" src="https://github.com/user-attachments/assets/394648fa-3132-460f-8d12-1ce09f21c07c" />
 
 
 </details>
