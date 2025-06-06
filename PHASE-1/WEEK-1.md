@@ -120,3 +120,38 @@ $ nano hello.hex
 | Stack pointer     | `sp (x2)`                        | Callee (indirect)    | Points to the top of the stack              |
 
 </details>
+<details>
+<summary><h3>Task:6 Stepping with GDB </h3></summary>
+
+### QEMU Set-up
+
+• This will install qemu-system-riscv32 along with other miscellaneous QEMU system emulators.
+
+```plaintext
+$ sudo apt update
+$ sudo apt install qemu-system-misc
+```
+• After Installation run, 
+```plaintext
+$ qemu-system-riscv32 -nographic -machine sifive_e -kernel hello_riscv.elf -S -gdb tcp::1234
+```
+• This will start QEMU in paused mode, waiting for GDB.
+• Then in another terminal, run:
+```plaintext
+$ riscv32-unknown-elf-gdb hello_riscv.elf
+```
+• Then Inside **GDB**:
+```plaintext
+target remote :1234
+break main
+continue
+info registers
+disassemble
+stepi
+```
+
+![image](https://github.com/user-attachments/assets/de08fa57-6983-4cfb-a6a0-1b86fa08e936)
+![image](https://github.com/user-attachments/assets/98d11dd5-8e5b-46c4-9984-864c9c81e263)
+![image](https://github.com/user-attachments/assets/d14da19f-e838-4099-9cf8-b4413e8c101c)
+
+</details>
