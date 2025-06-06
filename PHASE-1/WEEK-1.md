@@ -140,6 +140,9 @@ $ qemu-system-riscv32 -nographic -machine sifive_e -kernel hello_riscv.elf -S -g
 ```plaintext
 $ riscv32-unknown-elf-gdb hello_riscv.elf
 ```
+
+![image](https://github.com/user-attachments/assets/de08fa57-6983-4cfb-a6a0-1b86fa08e936)
+
 • Then Inside **GDB**:
 ```plaintext
 target remote :1234
@@ -150,7 +153,6 @@ disassemble
 stepi
 ```
 
-![image](https://github.com/user-attachments/assets/de08fa57-6983-4cfb-a6a0-1b86fa08e936)
 ![image](https://github.com/user-attachments/assets/98d11dd5-8e5b-46c4-9984-864c9c81e263)
 ![image](https://github.com/user-attachments/assets/d14da19f-e838-4099-9cf8-b4413e8c101c)
 
