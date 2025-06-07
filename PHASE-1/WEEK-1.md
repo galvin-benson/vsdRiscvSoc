@@ -244,3 +244,33 @@ $ diff sum1ton_O0.s sum1ton_O2.s
 | **Inlining Functions**    | Calls to small functions are replaced with their body  | Removes call overhead |
 
 </details>
+<details>
+<summary><h3>Task:9 Inline Assembly Basics </h3></summary>
+
+Function in C that returns the current value of the RISC-V cycle counter by accessing CSR register 0xC00 using inline assembly.
+<br>
+👉 [`rdcycle.c`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/rdcycle.c)
+
+![image](https://github.com/user-attachments/assets/9a90d703-8379-49d6-bf79-c12804b53c5a)
+
+### => static inline uint32_t rdcycle(void)
+
+`static inline`: Suggests inlining the function — avoids function call overhead.<br>
+`uint32_t`: 32-bit return value, matches the CSR data width on RV32.
+
+### => asm volatile ("csrr %0, cycle" : "=r"(c));
+
+<h3>Breaking Down: csrr %0, cycle </h3>
+
+`csrr`: Reads from a CSR (Control and Status Register).<br>
+`cycle`: CSR number 0xC00 – holds the number of cycles executed.
+`%0`: Placeholder for the output register (filled by GCC).
+
+<h3> =r"(c) – Operand Constraint</h3>
+
+| Part   | Meaning                                                          |
+| ------ | ---------------------------------------------------------------- |
+| `"=r"` | `"="` → it's an output; `"r"` → use any general-purpose register |
+| `(c)`  | Output value is stored in C variable `c`                         |
+
+</details>
