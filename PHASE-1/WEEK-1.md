@@ -38,6 +38,7 @@ $ riscv32-unknown-elf-gdb --version
 ```plaintext
 $ nano hello.c
 ```
+👉 [hello.c](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/hello.c)
 
 ![image](https://github.com/user-attachments/assets/abdaa2bc-7f55-4369-b0a0-7d87ec3537bb)
 
@@ -170,6 +171,7 @@ quit
 ![image](https://github.com/user-attachments/assets/c6edb6a9-5350-4a77-b21a-c7244993d5fe)
 
 ### Compile the C program (baremetal.c) with the linker script (linker.ld) and include debug info:
+👉 [baremetal.c](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/baremetal.c)  👉 [linker.ld](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/linker.ld)
 ```plaintext
 $ riscv32-unknown-elf-gcc -g -nostdlib -nostartfiles -T linker.ld -o baremetal.elf baremetal.c
 ```
