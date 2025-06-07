@@ -161,3 +161,37 @@ stepi
 ![image](https://github.com/user-attachments/assets/d14da19f-e838-4099-9cf8-b4413e8c101c)
 
 </details>
+<details>
+<summary><h3>Task:7 Running Under an Emulator </h3></summary>
+
+### Create and Run a bare-metal RISC-V ELF program using an emulator (Spike or QEMU)
+
+![image](https://github.com/user-attachments/assets/c6edb6a9-5350-4a77-b21a-c7244993d5fe)
+
+### Compile the C program (baremetal.c) with the linker script (linker.ld) and include debug info:
+```plaintext
+$ riscv32-unknown-elf-gcc -g -nostdlib -nostartfiles -T linker.ld -o baremetal.elf baremetal.c
+```
+### Use QEMU's RISC-V system emulator to run the ELF program
+```plaintext
+$ qemu-system-riscv32 -nographic -machine sifive_e -kernel baremetal.elf
+```
+### Debugging using GDB with QEMU
+```plaintext
+$ qemu-system-riscv32 -nographic -machine sifive_e -kernel baremetal.elf -S -gdb tcp::1234
+```
+• This will start QEMU in paused mode, waiting for GDB.
+• Then in another terminal, run:
+```plaintext
+$ riscv32-unknown-elf-gdb baremetal.elf
+```
+• Then Inside **GDB**:
+```plaintext
+target remote :1234
+info registers
+disassemble _start
+```
+![image](https://github.com/user-attachments/assets/71763faa-18e2-476f-9ccb-643509dae046)
+![image](https://github.com/user-attachments/assets/91c09f34-d1a7-44b8-adef-8c84a473e539)
+
+</details>
