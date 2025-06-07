@@ -139,7 +139,7 @@ $ sudo apt install qemu-system-misc
 ```plaintext
 $ qemu-system-riscv32 -nographic -machine sifive_e -kernel hello_riscv.elf -S -gdb tcp::1234
 ```
-• This will start QEMU in paused mode, waiting for GDB.
+• This will start QEMU in paused mode, waiting for GDB.<br>
 • Then in another terminal, run:
 ```plaintext
 $ riscv32-unknown-elf-gdb hello_riscv.elf
@@ -155,6 +155,7 @@ continue
 info registers
 disassemble
 stepi
+quit
 ```
 
 ![image](https://github.com/user-attachments/assets/98d11dd5-8e5b-46c4-9984-864c9c81e263)
@@ -180,7 +181,7 @@ $ qemu-system-riscv32 -nographic -machine sifive_e -kernel baremetal.elf
 ```plaintext
 $ qemu-system-riscv32 -nographic -machine sifive_e -kernel baremetal.elf -S -gdb tcp::1234
 ```
-• This will start QEMU in paused mode, waiting for GDB.
+• This will start QEMU in paused mode, waiting for GDB. <br>
 • Then in another terminal, run:
 ```plaintext
 $ riscv32-unknown-elf-gdb baremetal.elf
@@ -190,6 +191,7 @@ $ riscv32-unknown-elf-gdb baremetal.elf
 target remote :1234
 info registers
 disassemble _start
+quit
 ```
 ![image](https://github.com/user-attachments/assets/71763faa-18e2-476f-9ccb-643509dae046)
 ![image](https://github.com/user-attachments/assets/91c09f34-d1a7-44b8-adef-8c84a473e539)
