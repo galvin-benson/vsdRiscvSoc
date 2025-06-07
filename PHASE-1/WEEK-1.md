@@ -274,3 +274,33 @@ Function in C that returns the current value of the RISC-V cycle counter by acce
 | `(c)`  | Output value is stored in C variable `c`                         |
 
 </details>
+<details>
+<summary><h3>Task:10 Memory-Mapped I/O Demo </h3></summary>
+
+### Bare-metal C snippet to toggle a GPIO register located at 0x10012000
+👉 [`gpio.c`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/gpio.c)
+
+![image](https://github.com/user-attachments/assets/872d7e5a-41aa-4675-806f-60e81bf09b1d)
+
+### Explanation:
+- `volatile`<br>
+Tells the compiler not to optimize away this access, even if it looks unused.<br>
+
+- Memory-Mapped I/O<br>
+`0x10012000` is assumed to be the base address of a GPIO register.<br>
+Writing to it sends data directly to hardware.<br>
+
+- `uint32_t` ensures 4-byte alignment (32-bit wide register).<br>
+Mismatched types (like `uint8_t*` or `uint64_t*`) could lead to:<br>
+Unaligned access, Wrong register write, Unexpected hardware behavior
+
+| Element       | Purpose                                    |
+| ------------- | ------------------------------------------ |
+| `volatile`    | Prevent compiler from optimizing the write |
+| `uint32_t*`   | Ensures proper 32-bit aligned access       |
+| `0x10012000`  | Example GPIO memory-mapped address         |
+| `*gpio = 0x1` | Writes a value to hardware directly        |
+
+
+
+</details>
