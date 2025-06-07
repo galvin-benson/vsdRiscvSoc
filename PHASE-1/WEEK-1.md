@@ -234,5 +234,13 @@ $ diff sum1ton_O0.s sum1ton_O2.s
 | **Printf args**       | Built during runtime                | May precompute and pass directly         | Less runtime work.                                                           |
 | **Instruction Count** | Higher                              | Lower                                    | Optimized for speed and size.                                                |
 
+### `-O2` Optimized:
+| Optimization              | What it Does                                           | Effect                |
+| ------------------------- | ------------------------------------------------------ | --------------------- |
+| **Dead Code Elimination** | Removes unused variables or logic                      | Smaller binary        |
+| **Register Allocation**   | Keeps variables in CPU registers instead of RAM        | Faster access         |
+| **Instruction Combining** | Combines multiple C statements into fewer instructions | Performance boost     |
+| **Loop Optimization**     | Simplifies or unrolls loops                            | Speeds up iteration   |
+| **Inlining Functions**    | Calls to small functions are replaced with their body  | Removes call overhead |
 
 </details>
