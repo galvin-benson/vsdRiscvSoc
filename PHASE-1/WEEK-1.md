@@ -38,7 +38,7 @@ $ riscv32-unknown-elf-gdb --version
 ```plaintext
 $ nano hello.c
 ```
-👉 [hello.c](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/hello.c)
+👉 [`hello.c`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/hello.c)
 
 ![image](https://github.com/user-attachments/assets/abdaa2bc-7f55-4369-b0a0-7d87ec3537bb)
 
@@ -171,7 +171,7 @@ quit
 ![image](https://github.com/user-attachments/assets/c6edb6a9-5350-4a77-b21a-c7244993d5fe)
 
 ### Compile the C program (baremetal.c) with the linker script (linker.ld) and include debug info:
-👉 [baremetal.c](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/baremetal.c)  👉 [linker.ld](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/linker.ld)
+👉 [`baremetal.c`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/baremetal.c)  👉 [`linker.ld`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/linker.ld)
 ```plaintext
 $ riscv32-unknown-elf-gcc -g -nostdlib -nostartfiles -T linker.ld -o baremetal.elf baremetal.c
 ```
@@ -197,5 +197,42 @@ quit
 ```
 ![image](https://github.com/user-attachments/assets/71763faa-18e2-476f-9ccb-643509dae046)
 ![image](https://github.com/user-attachments/assets/91c09f34-d1a7-44b8-adef-8c84a473e539)
+
+</details>
+<details>
+<summary><h3>Task:8 Exploring GCC Optimisation </h3></summary>
+
+Comparing two compiler optimization levels to observe how GCC optimizations affect assembly output:  
+- `-O0` (no optimization)  
+- `-O2` (aggressive optimizations)
+
+👉 [`sum1ton.c`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/sum1ton.c) 
+
+![image](https://github.com/user-attachments/assets/05ec5ad9-502b-4964-bd7c-2d2f25b90608)
+
+Compile to assembly with no optimization(-O0):
+```plaintext
+$ riscv32-unknown-elf-gcc -march=rv32imac -mabi=ilp32 -O0 -S -o sum1ton_O0.s sum1ton.c
+```
+Compile to assembly with high optimization(-O2):
+```plaintext
+$ riscv32-unknown-elf-gcc -march=rv32imac -mabi=ilp32 -O2 -S -o sum1ton_O2.s sum1ton.c
+```
+Compare the Output codes:
+```plaintext
+$ diff sum1ton_O0.s sum1ton_O2.s
+```
+![image](https://github.com/user-attachments/assets/3ed27748-36f7-4eb9-9a2f-7fe312b81eda)
+
+### Explanation of Key Differences
+| Feature               | `-O0` (Debug Build)                 | `-O2` (Optimized Build)                  | Why it Matters                                                               |
+| --------------------- | ----------------------------------- | ---------------------------------------- | ---------------------------------------------------------------------------- |
+| **.rodata**           | `.rodata`                           | `.rodata.str1.4`                         | Optimized version uses string section with alignment for better performance. |
+| **.text**             | `.text`                             | `.text.startup`                          | Tells linker this is startup code (may be placed early in binary).           |
+| **Loop logic**        | Explicit `i=0; i<n; i++` in full    | May use tight loop, registers only       | Saves cycles by avoiding stack.                                              |
+| **Variables**         | `sum`, `i`, `n` all stored in stack | Some in registers, some constants folded | Compiler avoids unnecessary memory use.                                      |
+| **Printf args**       | Built during runtime                | May precompute and pass directly         | Less runtime work.                                                           |
+| **Instruction Count** | Higher                              | Lower                                    | Optimized for speed and size.                                                |
+
 
 </details>
