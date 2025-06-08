@@ -499,3 +499,114 @@ Only one "pseudo-thread" (loop block in `main`) can enter the critical section a
 ![image](https://github.com/user-attachments/assets/600898e6-6d3f-4e8f-804d-b4c1f9a6a715)
 
 </details>
+<details>
+<summary><h3>Task:16 Using Newlib printf Without an OS </h3></summary>
+
+Enable the use of printf() in a bare-metal RISC-V environment by retargeting the _write syscall to send characters to a memory-mapped UART.
+<br>
+
+### Essential Components
+
+- Memory-mapped UART address (e.g., `0x10000000`) — where you send chars.
+- syscalls.c — implements `_write` and `_sbrk` for minimal libc support.
+- link.ld — linker script defining `_end` symbol to mark heap start.
+- crt0.S — startup code to set stack pointer and call main.
+- main.c — `calls` printf.
+- Compile with Newlib libc (`-lc`) and GCC builtins (`-lgcc`) but no OS.
+
+### Code Snippets
+
+👉 [`syscalls.c`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/syscalls.c)
+
+![image](https://github.com/user-attachments/assets/2e5439de-671e-498f-9efe-e3d33f276142)
+
+👉 [`main.c`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/main.c)
+
+![image](https://github.com/user-attachments/assets/09e9d4e9-5bf3-44e5-9230-0a6ac1ac7cf7)
+
+👉 `crt0.S`
+
+![image](https://github.com/user-attachments/assets/412927af-76ca-4f0a-97f4-7479a1d517be)
+
+👉 `link.ld`
+
+![image](https://github.com/user-attachments/assets/d9066233-0615-45dc-be8f-5f0fc132f781)
+
+### Build and run command:
+```plaintext
+$ riscv32-unknown-elf-gcc -Wall -O2 -ffreestanding -nostdlib   -mabi=ilp32 -march=rv32imac   -o printf.elf main.c syscalls.c crt0.S -T link.ld -lc -lgcc
+$ qemu-system-riscv32 -machine virt -nographic   -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_dynamic.bin   -device loader,file=printf.elf,addr=0x80200000   -serial mon:stdio
+```
+![image](https://github.com/user-attachments/assets/1811a110-c16b-4868-91e7-76c2dd9d414e)
+
+### Expected UART Output
+
+    Hello from printf over UART!
+
+This confirms that printf() is internally using _write(), and it's been redirected to the UART peripheral.
+</details>
+<details>
+<summary><h3>Task:17 Endianness & Struct Packing </h3></summary>
+
+### Is RV32 Little-Endian by Default?
+Yes, the RV32 (RISC-V 32-bit) architecture is little-endian by default.
+- Little-endian means the least significant byte (LSB) is stored at the lowest memory address.
+- So, if you store 0x01020304 (4 bytes), in memory it will be:<br>
+    Address+0: 0x04  (LSB)<br>
+    Address+1: 0x03<br>
+    Address+2: 0x02<br>
+    Address+3: 0x01  (MSB)<br>
+
+### Verify Byte Ordering with a Union Trick in C
+The classic way is to use a union that lets you store a 32-bit integer but access its individual bytes:
+
+👉 [`endian_test.c`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/endian_test.c)
+
+![image](https://github.com/user-attachments/assets/05a89494-f927-4b05-bc9f-7dd92b91e5db)
+
+👉 `syscalls.c`
+
+![image](https://github.com/user-attachments/assets/fc01980c-e5a8-4b5b-b96f-b7ba1f5a041d)
+
+👉 `crt0.S`
+
+![image](https://github.com/user-attachments/assets/f3be7680-cd56-4e2c-a157-06720167e483)
+
+👉 `link.ld`
+
+![image](https://github.com/user-attachments/assets/6929830d-8903-4af4-a026-07338faff963)
+
+### Compile everything together
+
+```plaintext
+$ riscv32-unknown-elf-gcc -o endian_test.elf endian_test.c syscalls.c crt0.S -T link.ld -Wall -O2 -ffreestanding -nostdlib -march=rv32imac -mabi=ilp32 -lgcc
+$ qemu-system-riscv32 -machine virt -nographic   -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_dynamic.bin   -kernel endian_test.elf -serial mon:stdio
+```
+
+![image](https://github.com/user-attachments/assets/4418fa83-872c-4f58-931a-72d1072b049e)
+
+### Expected output if RV32 is little-endian
+
+    Byte 0: 0x04
+    Byte 1: 0x03
+    Byte 2: 0x02
+    Byte 3: 0x01
+
+**Explanation:**
+
+Little-endian means the least significant byte (LSB) is stored at the lowest memory address.<br>
+So 0x01020304 is stored as bytes in memory like this (from low to high address):
+
+| Address | Byte Value (hex) |
+| ------- | ---------------- |
+| addr    | 0x04 (LSB)       |
+| addr+1  | 0x03             |
+| addr+2  | 0x02             |
+| addr+3  | 0x01 (MSB)       |
+
+If it were big-endian, the output would show the bytes reversed, starting from 0x01 at Byte 0.
+<br> <br>
+**Summary:** 
+
+union trick reveals the byte order used by the processor by showing the memory layout of the 32-bit integer.
+</details>
