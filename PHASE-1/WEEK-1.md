@@ -368,3 +368,117 @@ $ riscv32-unknown-elf-readelf -S baremetal.elf
 | **Write your own**         | You can write a simple one based on your memory map (minimal for simulation/emulators).                                                                     |
 
 </details>
+<details>
+<summary><h3>Task:13 Interrupt Primer </h3></summary>
+
+### Enable the machine-timer interrupt (MTIP) and write a simple handler in C/assembly.
+**Steps to do:**
+1. Set `mtime` and `mtimecmp` via CLINT (memory-mapped)
+2. Enable MTIE in `mie` CSR
+3. Enable MIE in `mstatus` CSR
+4. Set `mtvec` to point to your ISR
+5. Write a timer ISR using `__attribute__((interrupt))`
+6. Add UART prints for visibility in QEMU
+
+👉 [`mtip.c`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/mtip.c) <br>
+    
+    void __attribute__((interrupt)) timer_handler(void) {
+    *mtimecmp = *mtime + 100000;
+    interrupt_counter++;
+    uart_puts("Timer fired: ");
+    uart_putint(interrupt_counter);
+    uart_putc('\n');
+    }
+
+    write_csr(mtvec, (uint32_t)timer_handler);               // Set trap vector
+    write_csr(mie, read_csr(mie) | (1 << 7));                // Enable MTIE
+    write_csr(mstatus, read_csr(mstatus) | (1 << 3));        // Enable global interrupts
+
+👉 [`crt0.S`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/crt0.S) <br>
+
+    .section .text
+    .globl _start
+    _start:
+    la sp, stack_top
+    call main
+    j .
+
+👉 `link.ld`
+
+    SECTIONS {
+    . = 0x80000000;
+    .text : { *(.text*) }
+    .data : { *(.data*) }
+    .bss  : { *(.bss*) }
+    }
+
+### Build Command
+```plaintext
+$ riscv32-unknown-elf-gcc -Wall -O2 -ffreestanding -nostdlib -mabi=ilp32 -march=rv32imac \
+  -o mtip.elf mtip.c crt0.S -T link.ld
+$ qemu-system-riscv32 -nographic -machine virt -bios none -kernel mtip.elf -serial mon:stdio
+```
+
+### Why It Matters
+| Purpose                  | Benefit                                         |
+| ------------------------ | ----------------------------------------------- |
+| **Real-time interrupts** | Enables timer-based task scheduling             |
+| **OS Development**       | Foundation for context switching and preemption |
+| **CSR & Trap Mastery**   | Core skill in low-level embedded systems        |
+
+Expected Output:
+    
+    Timer fired: 1
+    Timer fired: 2
+    Timer fired: 3
+    ...
+    
+![image](https://github.com/user-attachments/assets/c962d7ab-387f-4bf5-acc7-7adfc56d58e3)
+
+</details>
+<details>
+<summary><h3>Task:14 rv32imac vs rv32imc – What’s the “A”? </h3></summary>
+
+The `‘A’` atomic extension enhances the RISC-V ISA with hardware atomic instructions, enabling safe concurrent programming by supporting atomic read-modify-write memory operations. This is critical for modern OS kernels and multithreaded applications.
+| Aspect                    | Description                                                                                                    |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| **‘A’ Extension**         | Stands for **Atomic** instructions.                                                                            |
+| **Included Instructions** | Adds instructions like:                                                                                        |
+|                           | - `lr.w` (Load-Reserved Word)                                                                                  |
+|                           | - `sc.w` (Store-Conditional Word)                                                                              |
+|                           | - `amoadd.w` (Atomic Memory Operation Add Word)                                                                |
+|                           | - and other AMO instructions like `amoswap.w`, `amoxor.w`, `amoand.w`, `amoor.w`, `amomin.w`, `amomax.w`       |
+| **Purpose**               | Enables **atomic read-modify-write** operations on memory without interference from other cores or interrupts. |
+| **Why Useful?**           | Essential for implementing:                                                                                    |
+|                           | - Lock-free data structures (like atomic counters, queues)                                                     |
+|                           | - Synchronization primitives (mutexes, spinlocks)                                                              |
+|                           | - Operating system kernels and multi-threading support                                                         |
+| **Difference**            | `rv32imc` = base + multiply + compressed; `rv32imac` = adds atomic instructions to this set.                   |
+
+### Use Cases:
+
+<br>Lock-Free Data Structures:
+<br>Implement atomic counters, queues, or stacks where multiple threads or cores can safely update shared data without corrupting it.
+<br>
+<br>Synchronization Primitives:
+<br>Build mutexes, spinlocks, semaphores, and other synchronization mechanisms that require safe, exclusive access to shared resources.
+<br>
+<br>Operating System Kernels:
+<br>Essential for managing concurrency, scheduling, and interrupt handling in a multi-core environment.
+<br>
+<br>Multithreaded Applications:
+<br>Ensures safe communication and coordination between threads without performance-heavy locking.
+<br>
+
+## Analogy:
+
+| Instruction                                  | Analogy Explanation                                                                                                                                                                                  |
+| -------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **`lr.w` (Load Reserved)**                   | You **reserve a spot** on the whiteboard to write something. It marks your intention to change that spot.                                                                                            |
+| **`sc.w` (Store Conditional)**               | You try to **write your message** on that spot, but only succeed **if no one else has changed it since you reserved it**. If someone else wrote there first, your write fails, so you can try again. |
+| **`amoadd.w` (Atomic Memory Operation Add)** | You **add a number** to the existing value on the whiteboard **in one uninterruptible step**, ensuring no one else can mess with it while you’re adding.                                             |
+
+</details>
+<details>
+<summary><h3>Task:14 rv32imac vs rv32imc – What’s the “A”? </h3></summary>
+</details>
