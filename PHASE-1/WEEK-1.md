@@ -456,17 +456,16 @@ The `‘A’` atomic extension enhances the RISC-V ISA with hardware atomic inst
 | **Difference**            | `rv32imc` = base + multiply + compressed; `rv32imac` = adds atomic instructions to this set.                   |
 
 ### Use Cases:
-
-<br>Lock-Free Data Structures:
+**Lock-Free Data Structures:**
 <br>Implement atomic counters, queues, or stacks where multiple threads or cores can safely update shared data without corrupting it.
 <br>
-<br>Synchronization Primitives:
+<br>**Synchronization Primitives:**
 <br>Build mutexes, spinlocks, semaphores, and other synchronization mechanisms that require safe, exclusive access to shared resources.
 <br>
-<br>Operating System Kernels:
+<br>**Operating System Kernels:**
 <br>Essential for managing concurrency, scheduling, and interrupt handling in a multi-core environment.
 <br>
-<br>Multithreaded Applications:
+<br>**Multithreaded Applications:**
 <br>Ensures safe communication and coordination between threads without performance-heavy locking.
 <br>
 
@@ -480,5 +479,23 @@ The `‘A’` atomic extension enhances the RISC-V ISA with hardware atomic inst
 
 </details>
 <details>
-<summary><h3>Task:14 rv32imac vs rv32imc – What’s the “A”? </h3></summary>
+<summary><h3>Task:15 Atomic Test Program </h3></summary>
+
+### Approach: Spinlock using `lr.w` / `sc.w`
+The lock is implemented as a spinlock using RISC-V's `lr.w` (load-reserved) and `sc.w` (store-conditional) instructions.<br>
+Only one "pseudo-thread" (loop block in `main`) can enter the critical section at a time, ensuring mutual exclusion.
+
+👉 [`spinlock.c`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/spinlock.c)
+
+![image](https://github.com/user-attachments/assets/10ef1a82-971c-4c3b-aace-c5e850b2b03e)
+
+**Why It Matters**
+
+- Demonstrates the use of atomic primitives (lr.w, sc.w) for mutual exclusion in bare-metal systems.
+- Helps understand synchronization and concurrency without OS support.
+- Foundation for multi-core safe programming and OS kernel-level locking mechanisms.
+- Use UART prints in QEMU or hardware to observe that increments never overlap or skip values.
+
+![image](https://github.com/user-attachments/assets/600898e6-6d3f-4e8f-804d-b4c1f9a6a715)
+
 </details>
