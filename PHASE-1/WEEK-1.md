@@ -562,28 +562,40 @@ The classic way is to use a union that lets you store a 32-bit integer but acces
 
 👉 [`endian_test.c`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/endian_test.c)
 
-![image](https://github.com/user-attachments/assets/05a89494-f927-4b05-bc9f-7dd92b91e5db)
+![image](https://github.com/user-attachments/assets/43996e8d-825c-48d4-b593-f247f82adb5c)
 
 👉 `syscalls.c`
 
-![image](https://github.com/user-attachments/assets/fc01980c-e5a8-4b5b-b96f-b7ba1f5a041d)
+![image](https://github.com/user-attachments/assets/805ef3a7-7010-440c-9fd2-d944a571a5df)
+
 
 👉 `crt0.S`
 
-![image](https://github.com/user-attachments/assets/f3be7680-cd56-4e2c-a157-06720167e483)
+![image](https://github.com/user-attachments/assets/2c8c71a9-2ecc-46a2-a81a-53aeeb307b47)
+
 
 👉 `link.ld`
 
-![image](https://github.com/user-attachments/assets/6929830d-8903-4af4-a026-07338faff963)
+![image](https://github.com/user-attachments/assets/44289799-2d60-4150-a864-8c29aa3d7988)
+
 
 ### Compile everything together
 
 ```plaintext
-$ riscv32-unknown-elf-gcc -o endian_test.elf endian_test.c syscalls.c crt0.S -T link.ld -Wall -O2 -ffreestanding -nostdlib -march=rv32imac -mabi=ilp32 -lgcc
-$ qemu-system-riscv32 -machine virt -nographic   -bios /usr/lib/riscv64-linux-gnu/opensbi/generic/fw_dynamic.bin   -kernel endian_test.elf -serial mon:stdio
+$ riscv32-unknown-elf-gcc -Wall -O2 \
+  -ffreestanding -nostdlib \
+  -mabi=ilp32 -march=rv32imac_zicsr \
+  -T link.ld \
+  -o endian.elf \
+  crt0.S main.c syscalls.c \
+  -lc -lgcc
+
+$ qemu-system-riscv32 -nographic -machine virt -bios none \
+  -kernel endian.elf -serial mon:stdio
 ```
 
-![image](https://github.com/user-attachments/assets/4418fa83-872c-4f58-931a-72d1072b049e)
+![image](https://github.com/user-attachments/assets/ba9efc3f-8111-4f8f-bbb8-7588bad76beb)
+
 
 ### Expected output if RV32 is little-endian
 
