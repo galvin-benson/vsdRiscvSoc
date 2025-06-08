@@ -344,3 +344,27 @@ $ riscv32-unknown-elf-readelf -S baremetal.elf
 
 
 </details>
+<details>
+<summary><h3>Task:12 Start-up Code & crt0 </h3></summary>
+
+### What is `crt0.S`?
+- `crt0.S` (also called "C runtime zero") is a startup assembly file that runs before main() in any C program on bare-metal systems (like embedded RISC-V). It’s the first code executed after a system reset or power-on.
+
+### What does `crt0.S` do in a bare-metal RISC-V program?
+| Step | Purpose                                  | Description                                                                                          |
+| ---- | ---------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| 1    | **Set up the Stack Pointer (`sp`)**      | Initializes the `sp` to the top of available RAM so that functions and variables can use the stack.  |
+| 2    | **Zero out the `.bss` section**          | `.bss` holds uninitialized global/static variables. This section is cleared to zero (as per C spec). |
+| 3    | **Initialize `.data` (optional)**        | If needed, copies initialized variables from Flash to SRAM.                                          |
+| 4    | **Call `main()`**                        | Transfers control to the C program's `main()` function.                                              |
+| 5    | **Infinite loop after `main()` returns** | Prevents execution from running into garbage memory if `main()` returns (since there's no OS).       |
+
+### Where do I get a `crt0.S` file?
+| Source                     | Description                                                                                                                                                 |
+| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Newlib**                 | Comes with basic startup files for RISC-V, including `crt0.S`. Often used in embedded toolchains.                                                           |
+| **Platform-specific SDKs** | E.g., SiFive, ESP32-C3, Kendryte, etc. provide their own `crt0.S` tailored for their chips.                                                                 |
+| **Bare-metal examples**    | Projects like [riscv-boilerplate](https://github.com/sifive/freedom-e-sdk) or [RISC-V examples](https://github.com/riscv/riscv-pk) often have startup code. |
+| **Write your own**         | You can write a simple one based on your memory map (minimal for simulation/emulators).                                                                     |
+
+</details>
