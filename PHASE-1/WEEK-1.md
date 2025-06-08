@@ -301,6 +301,46 @@ Unaligned access, Wrong register write, Unexpected hardware behavior
 | `0x10012000`  | Example GPIO memory-mapped address         |
 | `*gpio = 0x1` | Writes a value to hardware directly        |
 
+</details>
+<details>
+<summary><h3>Task:11 Linker Script 101 </h3></summary>
+
+### Create a minimal linker script that places:
+- text section at address 0x00000000
+  - This is where Flash memory starts.
+  - Flash is non-volatile, so instructions (program code) are stored here to persist after reset.
+- data section at address 0x10000000
+  - This is usually the start of SRAM in many microcontrollers.
+  - SRAM is volatile, so it's used for variables that your program will read/write during execution.<br>
+  
+For the RV32IMC RISC-V target (bare-metal, no OS).
+
+👉 [`link.ld`](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/Assets/link.ld)
+
+![image](https://github.com/user-attachments/assets/a8a577e2-e61a-43b0-a4d4-a9e75bb2b401)
+
+Compile with the Custom Linker Script:
+```plaintext
+$ riscv32-unknown-elf-gcc -nostdlib -march=rv32imac -mabi=ilp32 -T link.ld -o baremetal.elf baremetal.c
+```
+Then inspect the result:
+```plaintext
+$ riscv32-unknown-elf-objdump -d baremetal.elf
+$ riscv32-unknown-elf-readelf -S baremetal.elf
+```
+![image](https://github.com/user-attachments/assets/4d871315-9e57-4479-ad65-c75acaf667e0)
+![image](https://github.com/user-attachments/assets/f8a3d970-21b8-4190-9af7-d0d6a231533c)
+
+| Feature               | **Flash Memory**                                 | **SRAM (Static RAM)**                                       |
+| --------------------- | ------------------------------------------------ | ----------------------------------------------------------- |
+| **Used For**          | Storing program code (`.text`)                   | Storing variables at runtime (`.data`, `.bss`, stack, heap) |
+| **Volatility**        | ❌ Non-volatile                                   | ✅ Volatile                                                  |
+| **Access**            | Read-only (during normal execution)              | Read-write                                                  |
+| **Speed**             | Slower than SRAM                                 | Faster access                                               |
+| **Typical Address**   | `0x00000000` (low memory region)                 | `0x10000000` or `0x80000000` (higher memory)                |
+| **Persistence**       | Retains contents after power off                 | Loses contents when power is off                            |
+| **Why This Address?** | Start address for processor reset (reset vector) | Mapped separately by memory controller                      |
+| **Physical Memory**   | Separate chip or flash section                   | Separate physical SRAM                                      |
 
 
 </details>
