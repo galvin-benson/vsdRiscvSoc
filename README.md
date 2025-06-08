@@ -15,5 +15,21 @@
 <h4>
 
 [PHASE-1:](https://github.com/galvin-benson/vsdRiscvSoc/tree/main/PHASE-1) Validate the existing RISC-V SoC design using Synopsys tools and SCL180 PDK.</h4></summary>
-- [WEEK-1:](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/WEEK-1.md) Focused on setting up a complete RISC-V development environment and understanding the foundational toolchain operations for RV32IMAC
+
+---
+
+### => [Week 1](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/WEEK-1.md) Summary / Overview
+
+In [Week 1](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/WEEK-1.md), the focus was on setting up the foundational toolchain required for RISC-V development and understanding the foundational toolchain operations for RV32IMAC and the basic workflow from writing C code to generating executable binaries. The key accomplishments include:
+
+- ✅ **Toolchain Setup**: Successfully unpacked and configured the `riscv-toolchain-rv32imac` with proper `PATH` settings and verified essential binaries like `gcc`, `objdump`, and `gdb`.
+- 📝 **First RISC-V C Program**: Compiled a minimal "Hello, RISC-V" C program using `riscv32-unknown-elf-gcc` with appropriate flags for the RV32IMC ISA.
+- 🔍 **Assembly Insight**: Generated the corresponding assembly (`.s`) file and analyzed common stack operations in the function prologue and epilogue.
+- 🧠 **Binary Analysis**: Learned to disassemble ELF files using `objdump`, convert them to raw hex using `objcopy`, and interpret instruction components like address, opcode, and operands.
+- 📄 **Register Reference**: Created a cheat-sheet mapping all 32 RISC-V integer registers to their ABI names and roles, improving familiarity with calling conventions.
+
+This week laid the groundwork for upcoming tasks involving debugging, simulation, and eventually deploying code on a RISC-V soft core or SoC platform.
+
+---
+
 </details>
