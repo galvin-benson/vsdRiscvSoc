@@ -33,3 +33,7 @@ This week laid the groundwork for upcoming tasks involving debugging, simulation
 ---
 
 </details>
+
+---
+
+![Alt](https://repobeats.axiom.co/api/embed/95f7a06c49d49537654174c7ea66a74f460a9058.svg "Repobeats analytics image")
