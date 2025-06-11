@@ -18,7 +18,7 @@
 
 ---
 
-### => [Week 1](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/WEEK-1.md) Summary / Overview
+### => [Week 1](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/WEEK-1.md) RISC-V Toolchain Setup:
 
 In [Week 1](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/WEEK-1.md), the focus was on setting up the foundational toolchain required for RISC-V development and understanding the foundational toolchain operations for RV32IMAC and the basic workflow from writing C code to generating executable binaries. The key accomplishments include:
 
@@ -30,6 +30,9 @@ In [Week 1](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/WEEK-
 
 This week laid the groundwork for upcoming tasks involving debugging, simulation, and eventually deploying code on a RISC-V soft core or SoC platform.
 
+---
+
+### => Week 2 
 
 </details>
 
