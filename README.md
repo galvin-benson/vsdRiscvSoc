@@ -32,7 +32,7 @@ This week laid the groundwork for upcoming tasks involving debugging, simulation
 
 ---
 
-### => Week 2 
+### => [Week 2](https://github.com/galvin-benson/vsdRiscvSoc/blob/main/PHASE-1/WEEK-2.md) vsdRiscvScl180:
 
 </details>
 
